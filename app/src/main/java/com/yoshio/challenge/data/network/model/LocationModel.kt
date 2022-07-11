@@ -12,7 +12,7 @@ data class LocationModel(
     @SerializedName("country")
     val country: String,
     @SerializedName("postcode")
-    val postcode: Int,
+    val postcode: String,
     @SerializedName("coordinates")
     val coordinates: CoordinatesModel,
     @SerializedName("timezone")

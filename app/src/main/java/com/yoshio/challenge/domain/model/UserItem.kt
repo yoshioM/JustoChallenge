@@ -1,5 +1,6 @@
 package com.yoshio.challenge.domain.model
 
+import com.yoshio.challenge.data.database.entities.UsersEntity
 import com.yoshio.challenge.data.network.model.*
 
 data class UserItem(
@@ -63,8 +64,8 @@ fun UserModel.toDomain() = UserItem(
     phone = results[0].phone,
     cell = results[0].cell,
     id = IdItem(
-        name = results[0].id.name,
-        value = results[0].id.value
+        name = results[0].id.name ?: "",
+        value = results[0].id.value ?: ""
     ),
     picture = PictureItem(
         large = results[0].picture.large,
@@ -72,4 +73,61 @@ fun UserModel.toDomain() = UserItem(
         thumbnail = results[0].picture.thumbnail
     ),
     nat = results[0].nat
+)
+
+fun UsersEntity.toDomain() = UserItem(
+    gender = "",
+    name = NameItem(
+        title = title,
+        first = firstName,
+        last = lastName
+    ),
+    location = LocationItem(
+        street = StreetItem(
+            number = 0,
+            name = street
+        ),
+        city = city,
+        state = state,
+        country = country,
+        postcode = postcode,
+        CoordinatesItem(
+            latitude = latitude,
+            longitude = longitude
+        ),
+        timezone = TimezoneItem(
+            offset = "",
+            description = ""
+        )
+    ),
+    email = email,
+    login = LoginItem(
+        uuid = "id_${id}",
+        username = "",
+        password = "",
+        salt = "",
+        md5 = "",
+        sha1 = "",
+        sha256 = ""
+    ),
+    dob = DobItem(
+        date = birthday,
+        age = age
+    ),
+    registered = RegisteredItem(
+        date = "",
+        age = 0
+    ),
+    phone = phone,
+    cell = cell,
+    id = IdItem(
+        name = "",
+        value = ""
+    ),
+    picture = PictureItem(
+        large = picture,
+        medium = "",
+        thumbnail = ""
+    ),
+    nat = ""
 )

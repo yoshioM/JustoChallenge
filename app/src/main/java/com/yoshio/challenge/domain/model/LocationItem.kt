@@ -10,7 +10,7 @@ data class LocationItem(
     val city: String,
     val state: String,
     val country: String,
-    val postcode: Int,
+    val postcode: String,
     val coordinates: CoordinatesItem,
     val timezone: TimezoneItem
 )
