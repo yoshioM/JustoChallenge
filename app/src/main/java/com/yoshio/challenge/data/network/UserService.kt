@@ -17,7 +17,6 @@ class UserService @Inject constructor(
         try {
             return withContext(Dispatchers.IO) {
                 val response = api.getRandomUser()
-                Log.e("RESPONSE: ", Gson().toJson(response.body()))
                 if (response.isSuccessful) {
                     response.body() ?: UserModel(emptyList(), InfoModel("", 0, 0, ""))
                 }else {
