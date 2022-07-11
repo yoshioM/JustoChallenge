@@ -15,6 +15,7 @@ class RandomUserViewModel @Inject constructor(
 ):ViewModel() {
 
     val userModel = MutableLiveData<List<UserItem>>()
+    val userDetailModel = MutableLiveData<UserItem>()
     val isLoading  = MutableLiveData<Boolean>()
     val showMessage = MutableLiveData<String>()
 
@@ -42,6 +43,15 @@ class RandomUserViewModel @Inject constructor(
             isLoading.postValue(false)
             showMessage.postValue("Deleted stored data")
 
+        }
+    }
+
+    fun getDataFromIdDatabse(idDB: String) {
+        viewModelScope.launch {
+            isLoading.postValue(true)
+            val  result= getRandomUserUseCase.getDataFromIdDatabase(idDB)
+            userDetailModel.postValue(result)
+            isLoading.postValue(false)
         }
     }
 }

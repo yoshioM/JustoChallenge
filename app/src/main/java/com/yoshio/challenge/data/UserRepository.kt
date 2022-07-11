@@ -28,4 +28,9 @@ class UserRepository @Inject constructor(
     suspend fun clearUserTbl() {
         dao.deleteUsersTbl()
     }
+
+    suspend fun getUserValuesFromDatabaseId(idDB: String): UserItem {
+        val response = dao.getUserById(idDB)
+        return response.toDomain()
+    }
 }

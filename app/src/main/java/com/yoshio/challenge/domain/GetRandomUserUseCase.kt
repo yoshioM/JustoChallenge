@@ -27,4 +27,8 @@ class GetRandomUserUseCase @Inject constructor(
     suspend fun clearData(){
         repository.clearUserTbl()
     }
+
+    suspend fun getDataFromIdDatabase(idDB: String): UserItem {
+       return repository.getUserValuesFromDatabaseId(idDB)
+    }
 }

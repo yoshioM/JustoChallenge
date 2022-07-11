@@ -122,7 +122,7 @@ fun UsersEntity.toDomain() = UserItem(
     cell = cell,
     id = IdItem(
         name = "",
-        value = ""
+        value = "$id"
     ),
     picture = PictureItem(
         large = picture,

@@ -1,5 +1,6 @@
 package com.yoshio.challenge.ui.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -24,6 +25,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        var adapter: UserAdapter
         randomUserViewModel.onCreate()
 
         randomUserViewModel.isLoading.observe(this, Observer {
@@ -37,7 +39,16 @@ class MainActivity : AppCompatActivity() {
 
         randomUserViewModel.userModel.observe(this, androidx.lifecycle.Observer { userList ->
             binding.rvUsers.layoutManager = LinearLayoutManager(this)
-            binding.rvUsers.adapter = UserAdapter(userList)
+            adapter = UserAdapter(userList)
+            binding.rvUsers.adapter = adapter
+            adapter.setOnItemClickListener(object: UserAdapter.onItemClickListener{
+                override fun onItemClick(position: String) {
+                    val intent = Intent(this@MainActivity,DetailUserView::class.java);
+                    intent.putExtra("idDB", position)
+                    startActivity(intent);
+                }
+
+            })
         })
 
         binding.btnAdd.setOnClickListener {
